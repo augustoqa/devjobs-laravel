@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+@endsection
+
 @section('navegacion')
     @include('ui.adminnav')
 @endsection
@@ -9,23 +13,23 @@
 
     <form class="max-w-lg mx-auto my-10">
         <div class="mb-5">
-            <label 
-                for="titulo" 
+            <label
+                for="titulo"
                 class="block text-gray-700 text-sm mb-2"
             >
                 Titulo Vacante:
             </label>
 
-            <input 
-                id="titulo" 
-                type="text" 
-                class="p-3 bg-gray-100 rounded form-input w-full @error('titulo') is-invalid @enderror" 
+            <input
+                id="titulo"
+                type="text"
+                class="p-3 bg-gray-100 rounded form-input w-full @error('titulo') is-invalid @enderror"
                 name="titulo">
         </div>
 
         <div class="mb-5">
-            <label 
-                for="categoria" 
+            <label
+                for="categoria"
                 class="block text-gray-700 text-sm mb-2"
             >
                 Categoría:
@@ -33,8 +37,8 @@
 
             <select
                 id="categoria"
-                class="block appearance-none w-full border border-gray-700 
-                        rounded leading-tight focus:outline-none 
+                class="block appearance-none w-full border border-gray-700
+                        rounded leading-tight focus:outline-none
                         focus:border-gray-500 p-3 bg-gray-100"
                 name="categoria"
             >
@@ -49,8 +53,8 @@
         </div>
 
         <div class="mb-5">
-            <label 
-                for="experiencia" 
+            <label
+                for="experiencia"
                 class="block text-gray-700 text-sm mb-2"
             >
                 Experiencia:
@@ -58,8 +62,8 @@
 
             <select
                 id="experiencia"
-                class="block appearance-none w-full border border-gray-700 
-                        rounded leading-tight focus:outline-none 
+                class="block appearance-none w-full border border-gray-700
+                        rounded leading-tight focus:outline-none
                         focus:border-gray-500 p-3 bg-gray-100"
                 name="experiencia"
             >
@@ -74,8 +78,8 @@
         </div>
 
         <div class="mb-5">
-            <label 
-                for="ubicacion" 
+            <label
+                for="ubicacion"
                 class="block text-gray-700 text-sm mb-2"
             >
                 Ubicacion:
@@ -83,8 +87,8 @@
 
             <select
                 id="ubicacion"
-                class="block appearance-none w-full border border-gray-700 
-                        rounded leading-tight focus:outline-none 
+                class="block appearance-none w-full border border-gray-700
+                        rounded leading-tight focus:outline-none
                         focus:border-gray-500 p-3 bg-gray-100"
                 name="ubicacion"
             >
@@ -97,10 +101,10 @@
                 @endforeach
             </select>
         </div>
-        
+
         <div class="mb-5">
-            <label 
-                for="salario" 
+            <label
+                for="salario"
                 class="block text-gray-700 text-sm mb-2"
             >
                 Salario:
@@ -108,8 +112,8 @@
 
             <select
                 id="salario"
-                class="block appearance-none w-full border border-gray-700 
-                        rounded leading-tight focus:outline-none 
+                class="block appearance-none w-full border border-gray-700
+                        rounded leading-tight focus:outline-none
                         focus:border-gray-500 p-3 bg-gray-100"
                 name="salario"
             >
@@ -123,6 +127,16 @@
             </select>
         </div>
 
+        <div class="mb-5">
+            <label
+                for="salario"
+                class="block text-gray-700 text-sm mb-2"
+            >
+                Descripción del Puesto:
+            </label>
+            <div class="editable"></div>
+        </div>
+
         <button
             type="submit"
             class="bg-green-500 w-full hover:bg-green-600 text-gray-100 font-bold p-3 focus:outline focus:shadow-outline uppercase"
@@ -130,4 +144,13 @@
             Publicar Vacante
         </button>
     </form>
+@endsection
+
+@section('scripts')
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editor = new MediumEditor('.editable')
+        })
+    </script>
 @endsection
