@@ -31237,6 +31237,19 @@ video {
   line-height: 2;
 }
 
+.dropzone {
+  border: 2px dashed #c1c1c1;
+  min-height: 200px;
+}
+
+.dropzone .dz-error {
+  display: none;
+}
+
+.dropzone .dz.message .dz-button {
+  color: #666;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

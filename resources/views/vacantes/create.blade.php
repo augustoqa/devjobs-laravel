@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.6/basic.min.css" integrity="sha512-MeagJSJBgWB9n+Sggsr/vKMRFJWs+OUphiDV7TJiYu+TNQD9RtVJaPDYP8hA/PAjwRnkdvU+NsTncYTKlltgiw==" crossorigin="anonymous" />
 @endsection
 
 @section('navegacion')
@@ -138,6 +139,16 @@
             <input type="hidden" name="descripcion" id="descripcion">
         </div>
 
+        <div class="mb-5">
+            <label
+                for="descripcion"
+                class="block text-gray-700 text-sm mb-2"
+            >
+                Imagen Vacante:
+            </label>
+            <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
+        </div>
+
         <button
             type="submit"
             class="bg-green-500 w-full hover:bg-green-600 text-gray-100 font-bold p-3 focus:outline focus:shadow-outline uppercase"
@@ -149,8 +160,12 @@
 
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.6/min/dropzone.min.js" integrity="sha512-KgeSi6qqjyihUcmxFn9Cwf8dehAB8FFZyl+2ijFEPyWu4ZM8ZOQ80c2so59rIdkkgsVsuTnlffjfgkiwDThewQ==" crossorigin="anonymous"></script>
     <script>
+        Dropzone.autoDiscover = false;
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Medium Editor
             const editor = new MediumEditor('.editable', {
                 toolbar: {
                     buttons: ['bold', 'italic', 'underline', 'quote', 'anchor', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', 'orderedList', 'unorderedList', 'h2', 'h3'],
@@ -166,6 +181,11 @@
                 const contenido = editor.getContent()
                 document.querySelector('#descripcion').value = contenido
             })
+
+            // Dropzone
+            const dropzoneDevJobs = new Dropzone('#dropzoneDevJobs', {
+                url: '/vacantes/imagen'
+            });
         })
     </script>
 @endsection
