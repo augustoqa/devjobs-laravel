@@ -147,6 +147,8 @@
                 Imagen Vacante:
             </label>
             <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
+
+            <p id="error"></p>
         </div>
 
         <button
@@ -185,11 +187,31 @@
             // Dropzone
             const dropzoneDevJobs = new Dropzone('#dropzoneDevJobs', {
                 url: '/vacantes/imagen',
+                dictDefaultMessage: 'Sube aquí tu archivo',
+                acceptedFiles: '.png,.jpg,.jpeg,.gif,.bmp',
+                addRemoveLinks: true,
+                dictRemoveFile: 'Borrar Archivo',
+                maxFiles: 1,
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
                 success: function(file, response) {
-                    console.log(response);
+                    // console.log(response);
+                    document.querySelector('#error').textContent = '';
+                },
+                error: function (file, response) {
+                    // console.log(response);
+                    // console.log(file);
+                    document.querySelector('#error').textContent = 'Formato no válido';
+                },
+                maxfilesexceeded: function (file) {
+                    if (this.files[1] != null) {
+                        this.removeFile(this.files[0]); // eliminar el archivo anterior
+                        this.addFile(file); // Agrega el nuevo archivo
+                    }
+                },
+                removedfile: function(file, response) {
+                    console.log('El archivo borrado fue: ', file)
                 }
             });
         })
