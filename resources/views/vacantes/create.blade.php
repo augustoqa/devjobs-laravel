@@ -147,6 +147,7 @@
                 Imagen Vacante:
             </label>
             <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
+            <input type="hidden" name="imagen" id="imagen">
 
             <p id="error"></p>
         </div>
@@ -196,8 +197,11 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
                 success: function(file, response) {
-                    // console.log(response);
+                    console.log(response.correcto);
                     document.querySelector('#error').textContent = '';
+
+                    // Colocar la respuesta del servidor en el input hidden
+                    document.querySelector('#imagen').textContent = response.correcto;
                 },
                 error: function (file, response) {
                     // console.log(response);
