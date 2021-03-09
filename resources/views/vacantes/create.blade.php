@@ -202,11 +202,9 @@
 
                     // Colocar la respuesta del servidor en el input hidden
                     document.querySelector('#imagen').textContent = response.correcto;
-                },
-                error: function (file, response) {
-                    // console.log(response);
-                    // console.log(file);
-                    document.querySelector('#error').textContent = 'Formato no válido';
+
+                    // Añadir al objeto de archivo el nombre del servidor
+                    file.nombreServidor = response.correcto;
                 },
                 maxfilesexceeded: function (file) {
                     if (this.files[1] != null) {
@@ -215,7 +213,14 @@
                     }
                 },
                 removedfile: function(file, response) {
-                    console.log('El archivo borrado fue: ', file)
+                    file.previewElement.parentNode.removeChild(file.previewElement)
+
+                    params = {
+                        imagen: file.nombreServidor
+                    }
+
+                    axios.post('/vacantes/borrarimagen', params)
+                        .then(respuesta => console.log(respuesta))
                 }
             });
         })

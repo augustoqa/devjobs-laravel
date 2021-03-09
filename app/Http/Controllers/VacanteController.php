@@ -8,6 +8,7 @@ use App\Salario;
 use App\Ubicacion;
 use App\Vacante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class VacanteController extends Controller
 {
@@ -109,5 +110,18 @@ class VacanteController extends Controller
         $imagen->move(public_path('storage/vacantes'), $nombreImagen);
 
         return response()->json(['correcto' => $nombreImagen]);
+    }
+
+    public function borrarimagen(Request $request)
+    {
+        if ($request->ajax()) {
+            $imagen = $request->get('imagen');
+
+            if (File::exists('storage/vacantes/' . $imagen)) {
+                File::delete('storage/vacantes/' . $imagen);
+            }
+
+            return response('Imagen Eliminada', 200);
+        }
     }
 }
