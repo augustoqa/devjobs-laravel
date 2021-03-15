@@ -152,6 +152,19 @@
             <p id="error"></p>
         </div>
 
+        <div class="mb-5">
+            <label
+                for="skills"
+                class="block text-gray-700 text-sm mb-2"
+            >
+                Habilidades y Conocimiento:
+            </label>
+            @php
+                $skills = ['HTML5', 'CSS3', 'CSSGrid', 'Flexbox', 'JavaScript', 'JQuery', 'Node', 'Angular', 'VueJS', 'ReactJS', 'React Hooks', 'Redux', 'Apollo', 'GraphQL', 'TypeScript', 'PHP', 'Laravel', 'Symfony', 'Python', 'Django', 'ORM', 'Sequelize', 'Mongoose', 'SQL', 'MVC', 'SASS', 'WordPress', 'Express', 'Deno', 'React Native', 'Futter', 'MobX', 'C#', 'Ruby on Rails']
+            @endphp
+            <lista-skills :skills="{{ json_encode($skills) }}"></lista-skills>
+        </div>
+
         <button
             type="submit"
             class="bg-green-500 w-full hover:bg-green-600 text-gray-100 font-bold p-3 focus:outline focus:shadow-outline uppercase"
