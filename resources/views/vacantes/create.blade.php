@@ -187,13 +187,20 @@
 
         <div class="mb-5">
             <label
-                for="descripcion"
+                for="imagen"
                 class="block text-gray-700 text-sm mb-2"
             >
                 Imagen Vacante:
             </label>
             <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
-            <input type="hidden" name="imagen" id="imagen">
+            <input type="hidden" name="imagen" id="imagen" value="{{ old('imagen') }}">
+
+            @error('imagen')
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3 mb-6" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block">{{ $message }}</span>
+                </div>
+            @enderror
 
             <p id="error"></p>
         </div>
@@ -259,12 +266,24 @@
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
+                init: function() {
+                    if (document.querySelector('#imagen').value.trim()) {
+                        let imagenPublicada = {};
+                        imagenPublicada.size = 1234;
+                        imagenPublicada.name = document.querySelector('#imagen').value
+
+                        this.options.addedfile.call(this, imagenPublicada);
+                        this.options.thumbnail.call(this, imagenPublicada, `/storage/vacantes/${imagenPublicada.name}`);
+
+                        imagenPublicada.previewElement.classList.add('dz-success', 'dz-complete');
+                    }
+                },
                 success: function(file, response) {
                     console.log(response.correcto);
                     document.querySelector('#error').textContent = '';
 
                     // Colocar la respuesta del servidor en el input hidden
-                    document.querySelector('#imagen').textContent = response.correcto;
+                    document.querySelector('#imagen').value = response.correcto;
 
                     // Añadir al objeto de archivo el nombre del servidor
                     file.nombreServidor = response.correcto;
@@ -279,7 +298,7 @@
                     file.previewElement.parentNode.removeChild(file.previewElement)
 
                     params = {
-                        imagen: file.nombreServidor
+                        imagen: file.nombreServidor ?? document.querySelector('#imagen').value
                     }
 
                     axios.post('/vacantes/borrarimagen', params)
