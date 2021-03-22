@@ -208,14 +208,26 @@
         <div class="mb-5">
             <label
                 for="skills"
-                class="block text-gray-700 text-sm mb-2"
+                class="block text-gray-700 text-sm mb-5"
             >
                 Habilidades y Conocimiento:
+                <span class="text-xs">(Elige al menos 3)</span>
             </label>
             @php
                 $skills = ['HTML5', 'CSS3', 'CSSGrid', 'Flexbox', 'JavaScript', 'JQuery', 'Node', 'Angular', 'VueJS', 'ReactJS', 'React Hooks', 'Redux', 'Apollo', 'GraphQL', 'TypeScript', 'PHP', 'Laravel', 'Symfony', 'Python', 'Django', 'ORM', 'Sequelize', 'Mongoose', 'SQL', 'MVC', 'SASS', 'WordPress', 'Express', 'Deno', 'React Native', 'Futter', 'MobX', 'C#', 'Ruby on Rails']
             @endphp
-            <lista-skills :skills="{{ json_encode($skills) }}"></lista-skills>
+            <lista-skills
+                :skills="{{ json_encode($skills) }}"
+                :oldskills="{{ json_encode(old('skills')) }}"
+            >
+            </lista-skills>
+
+            @error('skills')
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3 mb-6" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block">{{ $message }}</span>
+                </div>
+            @enderror
         </div>
 
         <button
