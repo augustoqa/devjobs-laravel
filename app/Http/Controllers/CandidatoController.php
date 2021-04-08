@@ -38,9 +38,14 @@ class CandidatoController extends Controller
         $data = $request->validate([
             'nombre' => 'required',
             'email' => 'required|email',
-            'cv' => 'required|mimes:pdf|max:1000',
+            // 'cv' => 'required|mimes:pdf|max:1000',
             'vacante_id' => 'required'
         ]);
+
+        $candidato = new Candidato($data);
+        $candidato->cv = '123.pdf';
+
+        $candidato->save();
 
         return "desde store";
     }
