@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Vacante;
 use App\Candidato;
 use Illuminate\Http\Request;
+use App\Notifications\NuevoCandidato;
 
 class CandidatoController extends Controller
 {
@@ -53,6 +55,11 @@ class CandidatoController extends Controller
         $candidato->cv = $nombreArchivo;
 
         $candidato->save();
+
+        // Enviar notificación al reclutador
+        $vacante = Vacante::find($data['vacante_id']);
+        $reclutador = $vacante->reclutador;
+        $reclutador->notify(new NuevoCandidato());
 
         return back()->with('estado', 'Tus datos se enviaron Correctamente! Suerte.');
     }
