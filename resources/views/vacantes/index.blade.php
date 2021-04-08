@@ -48,14 +48,14 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                        <a class="text-gray-500 hover:text-gray-600"> 
+                        <a class="text-gray-500 hover:text-gray-600">
                             Candidatos
                         </a>
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
-                        <a href="#" class="text-green-500 hover:text-green-600 mr-5">Editar</a>        
-                        <a href="#" class="text-red-600 hover:text-red-900 mr-5">Eliminar</a>        
-                        <a href="#" class="text-blue-600 hover:text-blue-900 mr-5">Ver</a>        
+                        <a href="#" class="text-green-500 hover:text-green-600 mr-5">Editar</a>
+                        <a href="#" class="text-red-600 hover:text-red-900 mr-5">Eliminar</a>
+                        <a href="{{ route('vacantes.show', ['vacante' => $vacante->id]) }}" class="text-blue-600 hover:text-blue-900 mr-5">Ver</a>
                     </td>
                     </tr>
                     @endforeach
