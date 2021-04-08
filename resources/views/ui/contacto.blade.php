@@ -1,7 +1,7 @@
 <aside class="md:w-2/5 bg-green-500 p-5 rounded m-3">
     <h2 class="text-2xl my-5 text-white uppercase font-bold text-center">Contacta al Reclutador</h2>
 
-    <form action="{{ route('candidatos.store') }}" method="POST">
+    <form action="{{ route('candidatos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
