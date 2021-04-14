@@ -30,6 +30,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/vacantes/imagen', 'VacanteController@imagen')->name('vacantes.imagen');
     Route::post('/vacantes/borrarimagen', 'VacanteController@borrarimagen')->name('vacantes.borrar');
 
+    // Cambair estado de la vacante
+    Route::post('/vacantes/{vacante}', 'VacanteController@estado')->name('vacantes.estado');
+
     // Notificaciones
     Route::get('/notificaciones', 'NotificacionesController')->name('notificaciones');
 });

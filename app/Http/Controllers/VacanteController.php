@@ -143,4 +143,13 @@ class VacanteController extends Controller
             return response('Imagen Eliminada', 200);
         }
     }
+
+    public function estado(Request $request, Vacante $vacante)
+    {
+        $vacante->activa = $request->estado;
+
+        $vacante->save();
+
+        return response()->json(['respuesta' => 'Correcto']);
+    }
 }
