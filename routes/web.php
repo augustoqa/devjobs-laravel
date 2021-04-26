@@ -13,13 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/vacantes', 'VacanteController@index')->name('vacantes.index');
@@ -39,6 +33,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Notificaciones
     Route::get('/notificaciones', 'NotificacionesController')->name('notificaciones');
 });
+
+// Página de inicio
+Route::get('/', 'InicioController')->name('inicio');
 
 // Enviar datos para una vacante
 Route::get('/candidatos/{id}', 'CandidatoController@index')->name('candidatos.index');
