@@ -192,4 +192,29 @@ class VacanteController extends Controller
 
         return response()->json(['respuesta' => 'Correcto']);
     }
+
+    public function buscar(Request $request)
+    {
+        $data = $request->validate([
+            'categoria' => 'required',
+            'ubicacion' => 'required',
+        ]);
+
+        $categoria = $data['categoria'];
+        $ubicacion = $data['ubicacion'];
+
+        $vacantes = Vacante::latest()
+            ->where([
+                'categoria_id' => $categoria,
+                'ubicacion_id' => $ubicacion,
+            ])
+            ->get();
+
+        return view('buscar.index', compact('vacantes'));
+    }
+
+    public function resultados()
+    {
+        return "mostrando resultados";
+    }
 }

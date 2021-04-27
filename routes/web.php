@@ -45,5 +45,7 @@ Route::get('/candidatos/{id}', 'CandidatoController@index')->name('candidatos.in
 Route::post('/candidatos/store', 'CandidatoController@store')->name('candidatos.store');
 
 
+Route::get('/busqueda/buscar', 'VacanteController@resultados')->name('vacnates.resultados');
+Route::post('/busqueda/buscar', 'VacanteController@buscar')->name('vacnates.buscar');
 Route::get('/vacantes/{vacante}', 'VacanteController@show')->name('vacantes.show');
 

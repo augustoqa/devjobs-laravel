@@ -16,6 +16,8 @@
                 Encuentre un trabajo remoto o en tu país
                 <span class="text-green-500 block">Desarrolladores / Diseñadores Web</span>
             </h1>
+
+            @include('ui.buscar')
         </div>
 
         <div class="block lg:w-1/2">
