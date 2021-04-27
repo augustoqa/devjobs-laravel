@@ -51,6 +51,8 @@
             </div>
         </div>
 
-        @include('ui.contacto')
+        @if ($vacante->activa === 1)
+            @include('ui.contacto')
+        @endif
     </div>
 @endsection
